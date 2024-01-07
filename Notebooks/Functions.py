@@ -216,7 +216,8 @@ def Confusion_Matrix_Func(y_test, y_pred, model_name):
                 ax        = ax,
                 annot_kws = {'size': 13},
                 cmap      = 'Blues',
-                fmt       = '')
+                fmt       = ''
+                )
 
     ax.set_xlabel('Prediction')
     ax.set_ylabel('Truth')

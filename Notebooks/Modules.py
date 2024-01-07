@@ -7,6 +7,7 @@ import                                warnings
 
 
 from   sklearn.preprocessing   import StandardScaler, OneHotEncoder, PolynomialFeatures
+from sklearn.svm               import SVC
 from   sklearn.impute          import SimpleImputer
 from   sklearn.model_selection import train_test_split, GridSearchCV, cross_validate                         
 from   sklearn.pipeline        import Pipeline
