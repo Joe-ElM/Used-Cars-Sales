@@ -23,7 +23,6 @@ from   sklearn.decomposition   import PCA
 from   sklearn.exceptions      import ConvergenceWarning
 from   sklearn.cluster         import KMeans
 from   sklearn.preprocessing   import RobustScaler, Normalizer
-from   sklearn.metrics         import f1_score, recall_score, accuracy_score, precision_score
 
 from   imblearn.over_sampling  import SMOTE, RandomOverSampler
 from   imblearn.under_sampling import RandomUnderSampler
