@@ -4,7 +4,8 @@ import seaborn                 as     sns
 import matplotlib.pyplot       as     plt
 import                                pickle
 import                                warnings
-
+import matplotlib.ticker       as     ticker
+import math
 
 from   sklearn.preprocessing   import StandardScaler, OneHotEncoder, PolynomialFeatures
 from   sklearn.impute          import SimpleImputer
@@ -270,3 +271,42 @@ def Kmeans_FE(X_train, X_test, X_aim, cat_cols):
     cat_cols_FE = cat_cols + ['TransactionCluster'] 
     
     return X_train_copy, X_test_copy, X_aim_copy, cat_cols_FE
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+def categorical_distribution(df, num_cols, num_unique, figsize):
+    """
+    Generate a categorical distribution plot for selected columns in a DataFrame.
+
+    Parameters:
+    - df (pd.DataFrame): The input DataFrame.
+    - num_cols (int): The desired number of columns in the subplot grid.
+    - num_unique (int): The desired number of unique values (nunique) for columns to include.
+
+    Returns: None
+    """
+    selected_features_number = sum(df.select_dtypes(include=['object', 'category']).nunique() <= num_unique)
+    num_rows                 = math.ceil(selected_features_number / num_cols)
+
+    mask             = df.select_dtypes(include=['object', 'category']).nunique() <= num_unique
+    selected_columns = df[mask.index[mask]].columns.to_list()
+
+    fig, axes = plt.subplots(nrows   = num_rows, 
+                             ncols   = num_cols, 
+                             figsize = figsize)
+    axes = axes.flatten()  # Flatten the 2D array of subplots into a 1D array
+
+    for i, col in enumerate(selected_columns):
+        ax = axes[i]
+        pd.crosstab(index     = df[col], 
+                    columns   = df['IsBadBuy'], 
+                    normalize = 'index').plot.bar(legend = False, 
+                                                  ax     = ax)
+        ax.set_title(col)
+        ax.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1))
+        ax.set_xticklabels(ax.get_xticklabels(), rotation = 60, ha = 'center')
+        ax.set_xlabel('')                                                           # Remove the x-axis label
+
+    plt.tight_layout()
+    plt.show()
