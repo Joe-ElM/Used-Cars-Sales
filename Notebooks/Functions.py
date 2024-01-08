@@ -225,5 +225,48 @@ def Confusion_Matrix_Func(y_test, y_pred, model_name):
     ax.yaxis.set_ticklabels(['G-Buy', 'Lemon'])
     ax.set_title(f'Confusion Matrix of {model_name}\n')
     
-    cf_matrix, fig
+    return cf_matrix, fig
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+def Kmeans_FE(X_train, X_test, X_aim, cat_cols):
+    
+    """ This function, copies the 3 relevant dataframes and generate an extra
+        TransactionCluster feature in each one of them, as well as updating
+        the categorical columns list
+    """
+    X_train_copy        = X_train.copy()
+    X_test_copy         = X_test.copy()
+    X_aim_copy          = X_aim.copy()
+
+    columns_k           = [ 'VehBCost', 
+                            'VehicleAge', 
+                            'VehOdo', 
+                            'MMRAcquisitionAuctionAveragePrice'
+                            ]
+
+    cluster_data        = X_train_copy[columns_k]
+
+    scaler              = StandardScaler()
+    scaled_cluster_data = scaler.fit_transform(cluster_data)  
+
+
+    kmeans              = KMeans(n_clusters = 8, random_state = 42, n_init=10).fit(scaled_cluster_data)
+
+#---------------------------------------------
+    X_train_copy['TransactionCluster'] = kmeans.labels_
+    X_train_copy.TransactionCluster    = X_train_copy.TransactionCluster.astype('category')
+
+
+    X_test_copy_cluster_data          = scaler.transform(X_test_copy[columns_k])  
+    X_test_copy['TransactionCluster'] = kmeans.predict(X_test_copy_cluster_data)
+    X_test_copy.TransactionCluster    = X_test_copy.TransactionCluster.astype('category')
+    # ---------------
+    X_aim_copy_cluster_data     = scaler.transform(X_aim_copy[columns_k])  
+    X_aim_copy['TransactionCluster'] = kmeans.predict(X_aim_copy_cluster_data)
+    X_aim_copy.TransactionCluster    = X_aim_copy.TransactionCluster.astype('category')
+
+    # Adding the new categorical columns to the categorical list 
+    cat_cols_FE = cat_cols + ['TransactionCluster'] 
+    
+    return X_train_copy, X_test_copy, X_aim_copy, cat_cols_FE

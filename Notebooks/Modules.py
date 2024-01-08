@@ -26,4 +26,4 @@ from   sklearn.preprocessing   import RobustScaler, Normalizer
 
 from   imblearn.over_sampling  import SMOTE, RandomOverSampler
 from   imblearn.under_sampling import RandomUnderSampler
-from   imblearn.pipeline       import Pipeline as imbPipeline   
+from   imblearn.pipeline       import Pipeline as imbPipeline  
