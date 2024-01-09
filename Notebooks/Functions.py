@@ -292,9 +292,9 @@ def categorical_distribution(df, num_cols, num_unique, figsize):
     mask                     = df.select_dtypes(include = ['object', 'category']).nunique() <= num_unique
     selected_columns         = df[mask.index[mask]].columns.to_list()
 
-    axes = plt.subplots(nrows   = num_rows, 
-                        ncols   = num_cols, 
-                        figsize = figsize)
+    fig, axes = plt.subplots(nrows   = num_rows, 
+                             ncols   = num_cols, 
+                             figsize = figsize)
     
     axes      = axes.flatten()  # Flatten the 2D array of subplots into a 1D array
 
@@ -312,3 +312,48 @@ def categorical_distribution(df, num_cols, num_unique, figsize):
 
     plt.tight_layout()
     plt.show()
+    
+    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+def Kmeans_FE_C(X_train, X_test, X_aim, cat_cols, n_clusters = 8):
+    
+    """ almost samer as Kmeans_FE just with ability to adjust number of Kmeans clusters
+        This function, copies the 3 relevant dataframes and generate an extra
+        TransactionCluster feature in each one of them, as well as updating
+        the categorical columns list
+    """
+    X_train_copy        = X_train.copy()
+    X_test_copy         = X_test.copy()
+    X_aim_copy          = X_aim.copy()
+
+    columns_k           = [ 'VehBCost', 
+                            'VehicleAge', 
+                            'VehOdo', 
+                            'MMRAcquisitionAuctionAveragePrice'
+                            ]
+
+    cluster_data        = X_train_copy[columns_k]
+
+    scaler              = StandardScaler()
+    scaled_cluster_data = scaler.fit_transform(cluster_data)  
+
+
+    kmeans              = KMeans(n_clusters = n_clusters, random_state = 42, n_init=10).fit(scaled_cluster_data)
+
+#---------------------------------------------
+    X_train_copy['TransactionCluster'] = kmeans.labels_
+    X_train_copy.TransactionCluster    = X_train_copy.TransactionCluster.astype('category')
+
+
+    X_test_copy_cluster_data          = scaler.transform(X_test_copy[columns_k])  
+    X_test_copy['TransactionCluster'] = kmeans.predict(X_test_copy_cluster_data)
+    X_test_copy.TransactionCluster    = X_test_copy.TransactionCluster.astype('category')
+    # ---------------
+    X_aim_copy_cluster_data     = scaler.transform(X_aim_copy[columns_k])  
+    X_aim_copy['TransactionCluster'] = kmeans.predict(X_aim_copy_cluster_data)
+    X_aim_copy.TransactionCluster    = X_aim_copy.TransactionCluster.astype('category')
+
+    # Adding the new categorical columns to the categorical list 
+    cat_cols_FE = cat_cols + ['TransactionCluster'] 
+    
+    return X_train_copy, X_test_copy, X_aim_copy, cat_cols_FE
