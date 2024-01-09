@@ -286,16 +286,18 @@ def categorical_distribution(df, num_cols, num_unique, figsize):
 
     Returns: None
     """
-    selected_features_number = sum(df.select_dtypes(include=['object', 'category']).nunique() <= num_unique)
+    selected_features_number = sum(df.select_dtypes(include = ['object', 'category']).nunique() <= num_unique)
     num_rows                 = math.ceil(selected_features_number / num_cols)
 
-    mask             = df.select_dtypes(include=['object', 'category']).nunique() <= num_unique
-    selected_columns = df[mask.index[mask]].columns.to_list()
+    mask                     = df.select_dtypes(include = ['object', 'category']).nunique() <= num_unique
+    selected_columns         = df[mask.index[mask]].columns.to_list()
 
-    fig, axes = plt.subplots(nrows   = num_rows, 
-                             ncols   = num_cols, 
-                             figsize = figsize)
-    axes = axes.flatten()  # Flatten the 2D array of subplots into a 1D array
+    axes = plt.subplots(nrows   = num_rows, 
+                        ncols   = num_cols, 
+                        figsize = figsize)
+    
+    axes      = axes.flatten()  # Flatten the 2D array of subplots into a 1D array
+
 
     for i, col in enumerate(selected_columns):
         ax = axes[i]
