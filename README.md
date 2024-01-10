@@ -131,12 +131,3 @@ An evaluation of the constructed predictive model has been conducted using vario
 ### Feature Importance
 
 ![Feature Importance](/Images/Feature-Importance.png)
-
-### Retention Strategies
-
-Address observations listed in the Feature Importance section, prioritizing from top to bottom. Suggestions provided for specific features.
-
-## Repository Description
-
-- How to Install
-- Files Description
