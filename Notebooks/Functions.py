@@ -73,10 +73,13 @@ def impute_car_missing_data(df):
     df['PRIMEUNIT'] = df['PRIMEUNIT'].fillna('NO')
     df['AUCGUART']  = df['AUCGUART'].fillna('YELLOW')
     # -----------------------------------------------
+    
     df.loc[(df['WheelTypeID'] == 0.0) & (df['WheelType'].isna()), 'WheelType'] = 'Type_0'
     # -----------------------------------------------------------------------------------
+    
     df.loc[df['Transmission'] == 'Manual', 'Transmission'] = 'MANUAL'
     # ------------------------------------------------------------------------------------
+    
     # Define masks
     mask_jeep    = (df['Make']  == 'JEEP')        & (df['Model'] == 'PATRIOT 2WD 4C')
     mask_hyundai = (df['Make']  == 'HYUNDAI')     & (df['Model'] == 'ELANTRA 2.0L I4 MPI')
@@ -120,22 +123,35 @@ def CLEAN_All_DATA(df, X_aim):
         
     """
     cat_cols = ['Auction', 'VehicleAge', 'Make'    , 'WheelType', 'VehYear',
-            'Model'  , 'Trim'      , 'SubModel', 'Color'    , 'Transmission',  
-            'Nationality', 'Size'  , 'TopThreeAmericanName' , 'IsOnlineSale',
-            'PRIMEUNIT'  , 'AUCGUART', 'BYRNO' , 'VNZIP1'   , 'VNST', 
-            'PurchDate_year','PurchDate_month' , 'PurchDate_dayofweek', 
-           ]     
+                'Model'  , 'Trim'      , 'SubModel', 'Color'    , 'Transmission',  
+                'Nationality', 'Size'  , 'TopThreeAmericanName' , 'IsOnlineSale',
+                'PRIMEUNIT'  , 'AUCGUART', 'BYRNO' , 'VNZIP1'   , 'VNST', 
+                'PurchDate_year','PurchDate_month' , 'PurchDate_dayofweek']
+       
 #       ------------------------------------------------------------------------
     num_cols = ['MMRAcquisitionAuctionAveragePrice', 'MMRAcquisitionAuctionCleanPrice',
-            'MMRAcquisitionRetailAveragePrice' , 'MMRAcquisitonRetailCleanPrice',
-            'MMRCurrentAuctionAveragePrice'    , 'MMRCurrentAuctionCleanPrice',
-            'MMRCurrentRetailAveragePrice'     , 'MMRCurrentRetailCleanPrice',
-            'VehBCost', 'VehOdo', 'WarrantyCost']
+                'MMRAcquisitionRetailAveragePrice' , 'MMRAcquisitonRetailCleanPrice',
+                'MMRCurrentAuctionAveragePrice'    , 'MMRCurrentAuctionCleanPrice',
+                'MMRCurrentRetailAveragePrice'     , 'MMRCurrentRetailCleanPrice',
+                'VehBCost', 'VehOdo', 'WarrantyCost']
+    # ---------------
+    # columns_to_convert = {'VehYear'     : 'category', 
+    #                       'VehicleAge'  : 'category', 
+    #                       'IsOnlineSale': 'category', 
+    #                       'BYRNO'       : 'category',
+    #                       'WheelTypeID' : 'category', 
+    #                       'VNZIP1'      : 'category',  #'str'  put str if---> df['VNZIP1']   
+    #                       }
     
-
+    # df               = df.astype(columns_to_convert)
+    # X_aim            = X_aim.astype(columns_to_convert)
+    
+    # Trim to the first 2 digits only
+    # df['VNZIP1']     = df['VNZIP1'].str[:5].astype('category')    # 5 is limit
+    # X_aim['VNZIP1']  = X_aim['VNZIP1'].str[:5].astype('category')
     # -----------------------------------------
-    df          = impute_car_missing_data(df)                   # fill in specific columns NaN data
-    X_aim       = impute_car_missing_data(X_aim) 
+    df               = impute_car_missing_data(df)              # fill in specific columns NaN data
+    X_aim            = impute_car_missing_data(X_aim) 
     # ------------------------------------------
    
     df.drop('WheelTypeID', axis=1, inplace=True)                # Dropping redundant WheelTypeID
