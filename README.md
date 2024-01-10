@@ -8,7 +8,7 @@ The objective of this project is to predict the likelihood of a car purchased at
 
 ## Dataset
 
-[Kaggle - competition!](https://www.kaggle.com/c/DontGetKicked/data)
+![Car Image](./images/14-745.jpg) <!-- Assuming you created an "images" folder -->
 
 - **Structured:** Yes
 - **Format:** Single .csv file
