@@ -1,4 +1,4 @@
-# Don't Get Kicked!
+# Used-Vehicle-Auctions!
 
 ## Project Overview
 
@@ -6,53 +6,96 @@ The objective of this project is to predict the likelihood of a car purchased at
 
 ## Dataset
 
-[Kaggle - Don't Get Kicked!](https://www.kaggle.com/c/DontGetKicked/data)
+[Kaggle - competetion !](https://www.kaggle.com/c/DontGetKicked/data)
 
 - **Structured:** Yes
 - **Format:** Single .csv file
 - **Size:** [Insert size] observations (unique: [Insert unique count])
-- **Number of Features:** [Insert feature count]
-- **Target Feature (Vector):** `IsBadBuy`, imbalanced, [Insert class distribution]
-- **NA Values:** [Insert count] / [Insert total observations]
-- **Duplicates:** [Insert duplicate count]
+- **Number of Features:** [33]
+- **Target Feature (Vector):** `IsBadBuy`, imbalanced, [12:88]
+
+- **Duplicates:** [0]
 
 ## Problem Space
 
 - Binary classification problem
-- Small dataset size for ML model training
+- Modertate size dataset size for ML model training
 - Imbalanced target class distribution
 - Robust model development with independent performance metrics
-- Custom scoring using F2 score (more weight on recall than precision)
+- Custom scoring using F1 score (same emphasis on recall and precision)
 
 ## Process
 
-### 1. Project Conventions
+### 1. Exploratory Data Analysis (EDA)
 
-Established coding conventions, variable names, random parameters, JupyterLab structure, and Git repository folder structure to ensure consistent and unbiased model performance comparisons.
+The EDA.ipynb file encapsulates the process of Exploratory Data Analysis (EDA), where I thoroughly explore and analyze datasets to extract valuable insights and discern patterns
 
-### 2. Exploratory Data Analysis (EDA)
+### 2. Models
 
-Independently conducted EDA by each team member to prevent bias. Insights exchanged and compared for comprehensive analysis.
+Developed base classification algorithms: Support Vector Machines (SVC), Logistic Regression, K-Nearest Neighbors, Decision Tree / Random Forest, Artificial Neural Networks, Ensemble.
 
-### 3. Models
+### 3. Pipeline
 
-Developed base classification algorithms: Support Vector Machines (SVC), Logistic Regression, K-Nearest Neighbors, Decision Tree / Random Forest. Additional models (Artificial Neural Networks, XGBoost, Adaboost, Gradient Boost, VotingClassifier) considered for later development.
+#### Polynomial Feature Expansion with PCA
 
-### 4. Pipeline
+A specialized pipeline is designed for feature engineering, combining polynomial feature expansion, standardization, and PCA (Principal Component Analysis). This pipeline is particularly tailored for enhancing the performance of a classification model. Below is a breakdown of the key components:
 
-Main pipeline created by one team member while other models followed its JupyterNotebook structure.
+#### Pipeline Components:
 
-### 5. Hyperparameters Fine-Tuning
+**Polynomial Feature Expansion:**
 
-Defined model-specific search spaces and fed them into GridSearches. Compared performance metrics and discussed potential improvements and model-specific issues.
+The pipeline initiates with polynomial feature expansion using PolynomialFeatures with a degree of 2.
+
+**Numerical Feature Standardization:**
+
+StandardScaler is employed to standardize numerical features, ensuring consistent scaling for optimal model training.
+
+**Principal Component Analysis (PCA):**
+
+A dimensionality reduction step is applied using PCA to retain 99% of the variance in the data.
+
+**Categorical Feature Encoding:**
+
+Categorical features are processed using OneHotEncoder to transform them into a machine-learning-compatible format. The handle_unknown='ignore' parameter is employed to gracefully handle unknown categories during encoding.
+
+**Classification Model:**
+
+A classification model is incorporated into the pipeline.
+
+#### Pipeline Execution:
+
+**Initialization:**
+
+Components such as polynomial feature expansion, numerical feature scaler, PCA, categorical feature encoder, and the classification model are initialized.
+
+**Column Transformation:**
+
+The ColumnTransformer orchestrates the application of appropriate preprocessing steps to numerical and categorical features.
+
+**Model Training:**
+
+The pipeline is trained on the provided training data, adapting to the classification model.
+
+**Model Prediction:**
+
+The trained model is employed to make predictions on new data, generating outcome predictions.
+
+#### Execution of the Pipeline:
+
+To execute this specialized pipeline, ensure the necessary Python packages are installed. Execute the provided code within the relevant environment, adjusting the pipeline or model parameters as needed. This pipeline is crafted to enhance the performance of a classification model through advanced feature engineering.
+
+### 4. Hyperparameter Optimization
+
+Model-specific search spaces were carefully defined and fed into GridSearches to facilitate hyperparameter fine-tuning. Performance metrics were compared, and potential improvements and model-specific
+issues were discussed in detail.
+
+### 5. Feature Engineering
+
+Incorporated Polynomial Features and K-Means Cluster Features based on model interpretation. Adjusted the main pipeline to seamlessly integrate the feature engineering function.
 
 ### 6. Model Interpretation
 
-Interpreted feature importance using model-specific methods (feature importance, permutation feat. importance, decision tree visualization).
-
-### 7. Feature Engineering
-
-Developed new features based on model interpretation. Main pipeline readjusted to accommodate feature engineering function.
+Derived insights into feature importance through model-specific methodologies, including analyses of feature importance, and decision tree visualizations.
 
 ## Models' Performance Metrics
 
