@@ -120,9 +120,17 @@ The confusion matrix of best scoring model is:
 
 ## Model Interpretation
 
+An evaluation of the constructed predictive model has been conducted using various performance metrics, aiming to ascertain its effectiveness in classifying auctioned vehicles into categories of good or bad buys. The model's performance has been quantified using several metrics, defined as follows:
+
+- F1 Score: A metric that is measured to balance precision and recall, providing a single performance indicator, especially valuable when dealing with imbalanced classes.
+- Recall: A metric reflecting the ability of the model to accurately identify and label the relevant (positive) cases.
+- Precision: A representation of the proficiency of the model to ensure the relevancy of labeled cases.
+- Accuracy: A metric showing the proportion of total predictions (both positive and negative) that were determined to be correct.
+  Subsequent to the performance evaluation, an analysis of feature importance was performed to identify the most influential features in the predictions made by the model.
+
 ### Feature Importance
 
-[Insert Feature Importance Visualization]
+![Feature Importance](/Images/Feature-Importance.png)
 
 ### Retention Strategies
 
