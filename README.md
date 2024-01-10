@@ -110,6 +110,9 @@ Derived insights into feature importance through model-specific methodologies, i
 
 The best-performing model is `Random Forest Classifier`. It's tuned toward the F1 score
 
+Theconfusion matrix of best scoring model is:
+![Confusion Matrix](/Images/Best Model RF.png)
+
 ## Model Interpretation
 
 ### Feature Importance
