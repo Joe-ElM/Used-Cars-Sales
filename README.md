@@ -4,6 +4,8 @@
 
 The objective of this project is to predict the likelihood of a car purchased at an auction being a "kick" (bad buy). This prediction can aid auto dealerships in implementing cost-effective retention strategies to prevent undesirable purchases and potential losses.
 
+![Car Image](D:/Visual Studio Code/Used Cars Sales/14-745.jpg)
+
 ## Dataset
 
 [Kaggle - competition!](https://www.kaggle.com/c/DontGetKicked/data)
