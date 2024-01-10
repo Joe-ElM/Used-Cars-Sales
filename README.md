@@ -4,9 +4,9 @@
 
 The objective of this project is to predict the likelihood of a car purchased at an auction being a "kick" (bad buy). This prediction can aid auto dealerships in implementing cost-effective retention strategies to prevent undesirable purchases and potential losses.
 
-![Car Image](Used-Vehicle-Auctions/Images//14-745.jpg) <!-- Assuming you created an "images" folder -->
-
 ## Dataset
+
+![Download Data](/Data/data_train.csv)
 
 - **Structured:** Yes
 - **Format:** Single .csv file
@@ -52,7 +52,7 @@ StandardScaler is employed to standardize numerical features, ensuring consisten
 
 **Principal Component Analysis (PCA):**
 
-A dimensionality reduction step is applied using PCA to retain 99% of the variance in the data.
+A dimensionality reduction step is applied using `PCA to retain 99%` of the variance in the data.
 
 **Categorical Feature Encoding:**
 
@@ -60,7 +60,7 @@ Categorical features are processed using OneHotEncoder to transform them into a 
 
 **Classification Model:**
 
-A classification model is incorporated into the pipeline.
+A `classification` model is incorporated into the pipeline.
 
 #### Pipeline Execution:
 
@@ -91,7 +91,7 @@ issues were discussed in detail.
 
 ### 5. Feature Engineering
 
-Incorporated Polynomial Features and K-Means Cluster Features based on model interpretation. Adjusted the main pipeline to seamlessly integrate the feature engineering function.
+Incorporated Polynomial Features and K-Means Clusters Feature based on model interpretation. Adjusted the main pipeline to seamlessly integrate the feature engineering function.
 
 ### 6. Model Interpretation
 
@@ -108,7 +108,7 @@ Derived insights into feature importance through model-specific methodologies, i
 
 ## Choosing the Best Model
 
-The best-performing model is [Random Forest]. It's tuned toward the F1 score
+The best-performing model is `Random Forest Classifier`. It's tuned toward the F1 score
 
 ## Model Interpretation
 
