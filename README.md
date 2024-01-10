@@ -1,5 +1,7 @@
 # Used-Vehicle-Auctions!
 
+![Used-Vehicle-Auctions](/Images/605.png)
+
 ## Project Overview
 
 The objective of this project is to predict the likelihood of a car purchased at an auction being a "kick" (bad buy). This prediction can aid auto dealerships in implementing cost-effective retention strategies to prevent undesirable purchases and potential losses.
@@ -8,7 +10,7 @@ The objective of this project is to predict the likelihood of a car purchased at
 
 ## Dataset
 
-![Download Data](/Data/data_train.csv)
+![Download](/Data/data_train.csv)
 
 - **Structured:** Yes
 - **Format:** Single .csv file
