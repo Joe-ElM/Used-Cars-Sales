@@ -291,7 +291,7 @@ def Kmeans_FE(X_train, X_test, X_aim, cat_cols):
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
-def categorical_distribution(df, num_cols, num_unique, figsize):
+def categorical_distribution(df, num_cols, num_unique, figsize, title):
     """
     Generate a categorical distribution plot for selected columns in a DataFrame.
 
@@ -324,10 +324,12 @@ def categorical_distribution(df, num_cols, num_unique, figsize):
         ax.set_title(col)
         ax.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1))
         ax.set_xticklabels(ax.get_xticklabels(), rotation = 60, ha = 'center')
-        ax.set_xlabel('')                                                           # Remove the x-axis label
-
+        ax.set_xlabel('')
+        
+    plt.suptitle(title, y=1.02, fontsize = 18)
     plt.tight_layout()
     plt.show()
+
     
     # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
