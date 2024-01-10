@@ -6,7 +6,7 @@ The objective of this project is to predict the likelihood of a car purchased at
 
 ## Dataset
 
-[Kaggle - competetion !](https://www.kaggle.com/c/DontGetKicked/data)
+[Kaggle - competition!](https://www.kaggle.com/c/DontGetKicked/data)
 
 - **Structured:** Yes
 - **Format:** Single .csv file
@@ -99,15 +99,16 @@ Derived insights into feature importance through model-specific methodologies, i
 
 ## Models' Performance Metrics
 
-|               | Support Vector Machine | K-Nearest Neighbors | Decision Tree      | Logistic Regression | Random Forest      | XGBoost            |
-| :------------ | ---------------------- | ------------------- | ------------------ | ------------------- | ------------------ | ------------------ |
-| **F2 Score**  | [Insert score]         | [Insert score]      | [Insert score]     | [Insert score]      | [Insert score]     | [Insert score]     |
-| **Recall**    | [Insert recall]        | [Insert recall]     | [Insert recall]    | [Insert recall]     | [Insert recall]    | [Insert recall]    |
-| **Precision** | [Insert precision]     | [Insert precision]  | [Insert precision] | [Insert precision]  | [Insert precision] | [Insert precision] |
+|               | Support Vector Machine | K-Nearest Neighbors | Decision Tree | Logistic Regression | Random Forest | ANN    |
+| :------------ | ---------------------- | ------------------- | ------------- | ------------------- | ------------- | ------ |
+| **F1 Score**  | 37.53%                 | 22.69%              | 35.87%        | 39.75%              | 43.48%        | 37.73% |
+| **Recall**    | 41.25%                 | 20.92%              | 27.07%        | 63.83%              | 42.20%        | 28.72% |
+| **Precision** | 82.29%                 | 24.78%              | 53.13%        | 28.86%              | 44.85%        | 54.98% |
+| **Accuracy**  | 34.42%                 | 81.62%              | 87.52%        | 75.05%              | 85.86%        | 87.78% |
 
 ## Choosing the Best Model
 
-The best-performing model is [Insert Best Model]. It's tuned toward the F2 score, with more weight on recall, aligning with the project's goal.
+The best-performing model is [Random Forest]. It's tuned toward the F1 score
 
 ## Model Interpretation
 
@@ -119,106 +120,7 @@ The best-performing model is [Insert Best Model]. It's tuned toward the F2 score
 
 Address observations listed in the Feature Importance section, prioritizing from top to bottom. Suggestions provided for specific features.
 
-## Project Highlights
-
-- Shared files for functions and global settings
-- Main pipeline with external model-definitions .py file
-- Advanced confusion matrix with meaningful color-coding
-- Bulk generation of data visualizations for streamlined EDA
-
 ## Repository Description
 
 - How to Install
 - Files Description
-
-# Auction Car Purchses!
-
-## Project Overview
-
-In this project, I aim to predict the likelihood of a car turning into a "kick" (a problematic purchase) using machine learning classification algorithms. The primary goal is to assist auto dealerships in making informed decisions, mitigating potential losses, and implementing effective retention strategies.
-
-## Dataset
-
-[Kaggle - Don't Get Kicked!](https://www.kaggle.com/c/DontGetKicked/data)
-
-- **Structure:** Tabular (CSV)
-- **Size:** [65620] records
-- **Features:** [PurchDate Auction VehYear VehicleAge Make Model Trim SubModel Color Transmission WheelTypeID WheelType VehOdo Nationality Size TopThreeAmericanName MMRAcquisitionAuctionAveragePrice MMRAcquisitionAuctionCleanPrice MMRAcquisitionRetailAveragePrice MMRAcquisitonRetailCleanPrice MMRCurrentAuctionAveragePrice MMRCurrentAuctionCleanPrice MMRCurrentRetailAveragePrice MMRCurrentRetailCleanPrice PRIMEUNIT AUCGUART BYRNO VNZIP1 VNST VehBCost IsOnlineSale WarrantyCost]
-- **Target Feature:** `IsBadBuy`, imbalanced, [12/88]
--
-- **Duplicates:** [No dublicates]
-
-## Problem Space
-
-- Binary classification challenge
-- Limited dataset size for model training
-- Imbalanced distribution of target classes
-- Focus on building a robust model with unbiased performance metrics
-- Custom scoring using F2 score, emphasizing recall over precision
-
-## Project Journey
-
-### 1. Establishing Conventions
-
-I set coding standards, variable naming, randomization parameters, JupyterLab notebook structure, and Git repository organization for consistency and efficient collaboration.
-
-### 2. Exploratory Data Expedition (EDE)
-
-I independently conducted EDE to foster unbiased insights. Insights were shared, discussed, and integrated for comprehensive analysis.
-
-### 3. Model Expedition
-
-I developed foundational classification algorithms: Support Vector Machines (SVC), Logistic Regression, K-Nearest Neighbors, Decision Tree / Random Forest. Considered additional models for future exploration.
-
-### 4. Model Expedition Pipeline
-
-I created the main pipeline while ensuring flexibility for model-specific variations introduced later.
-
-### 5. Fine-Tuning Hyperparameters
-
-I defined model-specific search spaces and executed GridSearches. Evaluated and compared performance metrics, fostering insightful discussions for improvement.
-
-### 6. Decoding Model Insights
-
-I interpreted feature importance utilizing model-specific methods such as feature importance, permutation feature importance, and decision tree visualization.
-
-### 7. Feature Evolution
-
-I generated new features based on model interpretations. Adapted the main pipeline to accommodate evolving feature engineering needs.
-
-## Performance Metrics
-
-| Model               | F2 Score       | Recall          | Precision          |
-| :------------------ | -------------- | --------------- | ------------------ |
-| SVM                 | [Insert score] | [Insert recall] | [Insert precision] |
-| K-NN                | [Insert score] | [Insert recall] | [Insert precision] |
-| Decision Tree       | [Insert score] | [Insert recall] | [Insert precision] |
-| Logistic Regression | [Insert score] | [Insert recall] | [Insert precision] |
-| Random Forest       | [Insert score] | [Insert recall] | [Insert precision] |
-| XGBoost             | [Insert score] | [Insert recall] | [Insert precision] |
-
-## Optimal Model Selection
-
-The most effective model, considering the F2 score, is [Insert Best Model]. This model is finely tuned for recall, aligning perfectly with my project's mission.
-
-## Interpreting Model Insights
-
-### Feature Impact
-
-[Insert Visualization of Feature Impact]
-
-### Strategies for Retention
-
-I will address key observations from the feature impact analysis. Prioritize initiatives based on impact, considering unique challenges and strengths of each feature.
-
-## Project Highlights
-
-- Shared files promoting consistency and efficient collaboration
-- Main pipeline adaptable to model-specific variations
-- Advanced confusion matrix with purposeful color-coding
-- Automated data visualization for streamlined EDE
-
-## Repository Guide
-
-- Installation instructions
-- File descriptions
