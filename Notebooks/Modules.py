@@ -14,7 +14,7 @@ from   sklearn.impute          import SimpleImputer
 from   sklearn.model_selection import train_test_split, GridSearchCV, cross_validate                         
 from   sklearn.pipeline        import Pipeline
 from   sklearn.metrics         import precision_score, recall_score, accuracy_score, f1_score, make_scorer
-from   sklearn.metrics         import confusion_matrix, euclidean_distances, precision_recall_curve
+from   sklearn.metrics         import confusion_matrix, euclidean_distances, precision_recall_curve, roc_curve, auc
 from   sklearn.ensemble        import RandomForestClassifier, VotingClassifier
 from   sklearn.compose         import ColumnTransformer
 from   sklearn.tree            import DecisionTreeClassifier, plot_tree
