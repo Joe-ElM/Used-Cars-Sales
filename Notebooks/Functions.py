@@ -375,3 +375,23 @@ def Kmeans_FE_C(X_train, X_test, X_aim, cat_cols, n_clusters = 8):
     cat_cols_FE = cat_cols + ['TransactionCluster'] 
     
     return X_train_copy, X_test_copy, X_aim_copy, cat_cols_FE
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+def fpr_tpr(y_test, y_pred):
+    """
+    Calculate False Positive Rate (FPR) and Recall (True Positive Rate) from the confusion matrix.
+
+    Parameters:
+    - y_test (array-like): True labels.
+    - y_pred (array-like): Predicted labels.
+
+    Returns:
+    - float: False Positive Rate (FPR) calculated from the confusion matrix.
+    - float: Recall (True Positive Rate) calculated from the confusion matrix.
+    """
+    tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
+    cm_fpr = fp / (fp + tn)
+    cm_recall = tp / (fn + tp)
+    
+    return cm_fpr, cm_recall
