@@ -10,7 +10,7 @@ The objective of this project is to predict the likelihood of a car purchased at
 
 ## Dataset
 
-![Download](/Data/data_train.csv)
+![Download](/Data/)
 
 - **Structured:** Yes
 - **Format:** Single .csv file
