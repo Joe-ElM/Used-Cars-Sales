@@ -138,4 +138,4 @@ An evaluation of the constructed predictive model has been conducted using vario
 
 ### Data Set:
 
-Obtained from: [kaggle.com](https://https://www.kaggle.com/c/DontGetKicked/data)\
+Obtained from: [kaggle.com](https://www.kaggle.com/c/DontGetKicked/data)
