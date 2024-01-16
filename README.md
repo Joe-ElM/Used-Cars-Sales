@@ -14,7 +14,6 @@ The objective of this project is to predict the likelihood of a car purchased at
 
 - **Structured:** Yes
 - **Format:** Single .csv file
-- **Size:** [Insert size] observations (unique: [Insert unique count])
 - **Number of Features:** [33]
 - **Target Feature (Vector):** `IsBadBuy`, imbalanced, [12:88]
 
@@ -128,6 +127,15 @@ An evaluation of the constructed predictive model has been conducted using vario
 - Accuracy: A metric showing the proportion of total predictions (both positive and negative) that were determined to be correct.
   Subsequent to the performance evaluation, an analysis of feature importance was performed to identify the most influential features in the predictions made by the model.
 
-### Feature Importance
+## Feature Importance
 
 ![Feature Importance](/Images/Feature-Importance.png)
+
+## Repository description
+
+- how to install
+- files description
+
+### Data Set:
+
+Obtained from: [kaggle.com](https://https://www.kaggle.com/c/DontGetKicked/data)\
