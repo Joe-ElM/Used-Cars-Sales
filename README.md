@@ -27,6 +27,11 @@ The objective of this project is to predict the likelihood of a car purchased at
 - Robust model development with independent performance metrics
 - Custom scoring using F1 score (same emphasis on recall and precision)
 
+## Best Models
+
+- Notebook 4. LR Model (Logistic Regression)
+- Notebook 5. DT-RF Model (Decision-Tree / Random Forest)
+
 ## Process
 
 ### 1. Exploratory Data Analysis (EDA)
