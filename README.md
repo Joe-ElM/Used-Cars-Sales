@@ -38,12 +38,26 @@ The objective of this project is to predict the likelihood of a car purchased at
 
 ### 1. Exploratory Data Analysis (EDA)
 
-The EDA.ipynb file encapsulates the process of Exploratory Data Analysis (EDA), where I thoroughly explore and analyze datasets to extract valuable insights and discern patterns
+The EDA.ipynb file encapsulates the process of Exploratory Data Analysis (EDA), where I thoroughly explore and analyze datasets to extract valuable insights and discern patterns.
+
 Below are the boxplots and histograms of the numerical features
 ![Numerical Features](/Images/output.png)
 
-As for the categorical features, here are a few of them that is below a certain number of unique values
+And here are the correlation amongst them
+
+## Feature Correlation Analysis
+
+Explore the correlation among the features to understand their interrelationships and identify potential patterns within the dataset. Correlation analysis provides insights into how variables co-vary, aiding in uncovering dependencies that can influence model performance.
+
+![correlation](/Images/Correlation-among-numerical-variables.png)
+
+## Categorical Feature Distribution
+
+Visualize the distribution of categorical features with a focus on those below a certain number of unique values. The provided plot offers a glimpse into the diversity and frequency of categorical variables within the dataset.
+
 ![Categorical Features](/Images/categorical-distribution.png)
+
+This visualization assists in understanding the prevalence of different categories and their potential impact on the classification task. Analyzing categorical feature distributions is crucial for making informed decisions on feature engineering and preprocessing strategies.
 
 ### 2. Models
 
