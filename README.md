@@ -39,8 +39,11 @@ The objective of this project is to predict the likelihood of a car purchased at
 ### 1. Exploratory Data Analysis (EDA)
 
 The EDA.ipynb file encapsulates the process of Exploratory Data Analysis (EDA), where I thoroughly explore and analyze datasets to extract valuable insights and discern patterns
+Below are the boxplots and histograms of the numerical features
+![Numerical Features](/Images/output.png)
 
-![Numerical Features](/Images/Boxplots-Histograms-of-the-numerical-features.png)
+As for the categorical features, here are a few of them that is below a certain number of unique values
+![Categorical Features](/Images/categorical-distribution.png)
 
 ### 2. Models
 
