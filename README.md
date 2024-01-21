@@ -10,7 +10,7 @@ The objective of this project is to predict the likelihood of a car purchased at
 
 ## Dataset
 
-![Download](/Data/)
+The dataset is conveniently located in the "download" folder. Access the dataset to explore and analyze the features, gaining valuable insights into the characteristics of the breast cancer data. The dataset serves as the foundation for model training, validation, and evaluation in this project.
 
 - **Structured:** Yes
 - **Format:** Single .csv file
