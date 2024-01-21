@@ -43,13 +43,11 @@ The EDA.ipynb file encapsulates the process of Exploratory Data Analysis (EDA), 
 Below are the boxplots and histograms of the numerical features
 ![Numerical Features](/Images/output.png)
 
-And here are the correlation amongst them
-
 ## Feature Correlation Analysis
 
 Explore the correlation among the features to understand their interrelationships and identify potential patterns within the dataset. Correlation analysis provides insights into how variables co-vary, aiding in uncovering dependencies that can influence model performance.
 
-![correlation](/Images/Correlation-among-numerical-variables.png)
+![correlation](/Images/X_train-nummeric-heatmap.png)
 
 ## Categorical Feature Distribution
 
