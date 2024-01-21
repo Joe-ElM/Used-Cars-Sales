@@ -17,6 +17,8 @@ The objective of this project is to predict the likelihood of a car purchased at
 - **Number of Features:** [33]
 - **Target Feature (Vector):** `IsBadBuy`, imbalanced, [12:88]
 
+![Distribution](/Images/Distribution-of-Good-and-Bad-Buys-in-df.png)
+
 - **Duplicates:** [0]
 
 ## Problem Space
@@ -37,6 +39,8 @@ The objective of this project is to predict the likelihood of a car purchased at
 ### 1. Exploratory Data Analysis (EDA)
 
 The EDA.ipynb file encapsulates the process of Exploratory Data Analysis (EDA), where I thoroughly explore and analyze datasets to extract valuable insights and discern patterns
+
+![Numerical Features](/Images/Boxplots-Histograms-of-the-numerical-features.png)
 
 ### 2. Models
 
