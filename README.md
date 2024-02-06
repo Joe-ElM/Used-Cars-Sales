@@ -4,7 +4,7 @@
 
 ## Project Overview
 
-The objective of this project is to predict the likelihood of a car purchased at an auction being a "kick" (bad buy). This prediction can aid auto dealerships in implementing cost-effective retention strategies to prevent undesirable purchases and potential losses.
+In the realm of auto dealership ventures, selecting a used car is not merely about perusing a diverse range of options; it's also about having confidence in the vehicle's condition. Dealerships often acquire their used car inventory from auctions, with the shared goal of obtaining vehicles in top-notch condition. However, they face the persistent challenge of unintentionally procuring "kicks" – used cars plagued by serious issues that hinder their marketability. From tampered odometers to unforeseen mechanical glitches, these issues can be elusive to detect. This is where the predictive power of machine learning comes into play. By preemptively identifying potential "kicks," dealerships can safeguard their financial interests and ensure a superior inventory selection for customers.
 
 ![Description](/Images/14-745.png)
 
