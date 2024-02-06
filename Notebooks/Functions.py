@@ -6,6 +6,10 @@ import                                pickle
 import                                warnings
 import matplotlib.ticker       as     ticker
 import math
+import string
+import re
+import spacy
+import nltk
 
 from   sklearn.preprocessing   import StandardScaler, OneHotEncoder, PolynomialFeatures
 from   sklearn.impute          import SimpleImputer
@@ -23,6 +27,7 @@ from   sklearn.decomposition   import PCA
 from   sklearn.exceptions      import ConvergenceWarning
 from   sklearn.cluster         import KMeans
 from   sklearn.preprocessing   import RobustScaler, Normalizer
+from   sklearn.feature_extraction.text import CountVectorizer
 
 cat_cols = ['Auction', 'VehicleAge', 'Make'    , 'WheelType', 'VehYear',
             'Model'  , 'Trim'      , 'SubModel', 'Color'    , 'Transmission',  
@@ -391,7 +396,151 @@ def fpr_tpr(y_test, y_pred):
     - float: Recall (True Positive Rate) calculated from the confusion matrix.
     """
     tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
-    cm_fpr = fp / (fp + tn)
-    cm_recall = tp / (fn + tp)
+    cm_fpr         = fp / (fp + tn)
+    cm_recall      = tp / (fn + tp)
     
     return cm_fpr, cm_recall
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+punctuations = string.punctuation
+nlp          = spacy.load('en_core_web_sm')
+
+# Function to clean text
+def text_cleaner(sentence):
+    sentence             = re.sub('[.-]', '', sentence)        # To remove . and - from the str
+    doc                  = nlp(sentence.lower())
+    clean_doc            = [token.lemma_ for token in doc if token.lemma_ not in punctuations]
+    clean_doc            = list(set(clean_doc))                # deleting dublicates that mis occur when combining model and submodel
+    joined_clean_doc     = " ".join(clean_doc)                 # Join the cleaned tokens into a string
+    cleaned_doc_no_slash = joined_clean_doc.replace('/', '')   # Remove forward slashes
+    
+    return cleaned_doc_no_slash
+
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+def CLEAN_All_DATA_VEC(df, X_aim):
+    """
+    Returns cleaned DataFrame.
+    
+    Transform datatypes:
+        - transform Date and features to correct format
+        - Imputes Numerical and categorical columns
+       
+    Returns:
+        df  - Clean 
+        
+    """
+    cat_cols = ['Auction', 'VehicleAge', 'Make'    , 'WheelType', 'VehYear',
+                'Trim'      ,  'Color'    , 'Transmission',  # 'SubModel', 'Model',
+                'Nationality', 'Size'  , 'TopThreeAmericanName' , 'IsOnlineSale',
+                'PRIMEUNIT'  , 'AUCGUART', 'BYRNO' , 'VNZIP1'   , 'VNST', 
+                'PurchDate_year','PurchDate_month' , 'PurchDate_dayofweek']
+       
+#       ------------------------------------------------------------------------
+    num_cols = ['MMRAcquisitionAuctionAveragePrice', 'MMRAcquisitionAuctionCleanPrice',
+                'MMRAcquisitionRetailAveragePrice' , 'MMRAcquisitonRetailCleanPrice',
+                'MMRCurrentAuctionAveragePrice'    , 'MMRCurrentAuctionCleanPrice',
+                'MMRCurrentRetailAveragePrice'     , 'MMRCurrentRetailCleanPrice',
+                'VehBCost', 'VehOdo', 'WarrantyCost']
+    # ---------------
+    # columns_to_convert = {'VehYear'     : 'category', 
+    #                       'VehicleAge'  : 'category', 
+    #                       'IsOnlineSale': 'category', 
+    #                       'BYRNO'       : 'category',
+    #                       'WheelTypeID' : 'category', 
+    #                       'VNZIP1'      : 'category',  #'str'  put str if---> df['VNZIP1']   
+    #                       }
+    
+    # df               = df.astype(columns_to_convert)
+    # X_aim            = X_aim.astype(columns_to_convert)
+    
+    # Trim to the first 2 digits only
+    # df['VNZIP1']     = df['VNZIP1'].str[:5].astype('category')    # 5 is limit
+    # X_aim['VNZIP1']  = X_aim['VNZIP1'].str[:5].astype('category')
+    # -----------------------------------------
+    df               = impute_car_missing_data(df)              # fill in specific columns NaN data
+    X_aim            = impute_car_missing_data(X_aim) 
+    # ------------------------------------------
+   
+    df.drop('WheelTypeID', axis=1, inplace=True)                # Dropping redundant WheelTypeID
+    X_aim.drop('WheelTypeID', axis=1, inplace=True)             # Dropping redundant WheelTypeID
+    # -------------------------------------------
+    # This section top add cleaning of Model and submodel features
+    df['Model_SubModel']     = df['Model'].astype(str) + ' ' + df['SubModel'].astype(str)        # Combine 'Model' and 'SubModel' columns
+    df['Model_SubModel']     = df['Model_SubModel'] .apply(text_cleaner)
+                                         # Apply the function to the combined text
+    X_aim['Model_SubModel']  = X_aim['Model'].astype(str) + ' ' + X_aim['SubModel'].astype(str)  # Combine 'Model' and 'SubModel' columns
+    X_aim['Model_SubModel']  = X_aim['Model_SubModel'] .apply(text_cleaner)
+    
+    df.drop(['Model','SubModel']   , axis = 1 , inplace = True)
+    X_aim.drop(['Model','SubModel'], axis = 1 , inplace = True) 
+    # ---------------------------------------------------------------------
+    # count_vectorizer   = CountVectorizer()
+    # features_bow       = count_vectorizer.fit_transform(df['Model_SubModel'])
+    # bow_names          = count_vectorizer.get_feature_names_out()  
+    # df_bow             = pd.DataFrame(features_bow.toarray(), columns = bow_names).astype('category')
+    # df                 = pd.concat([df, df_bow], axis=1)
+    # df.drop(['Model_SubModel'], axis = 1 , inplace = True)  
+    # # ----------   ----------------          ------------------
+    # features_bow_aim       = count_vectorizer.transform(X_aim['Model_SubModel'])  
+    # df_bow_aim             = pd.DataFrame(features_bow_aim.toarray(), columns = bow_names).astype('category')
+    # X_aim                  = pd.concat([X_aim, df_bow_aim], axis=1)
+    # X_aim.drop(['Model_SubModel'], axis = 1 , inplace = True)      
+    # ---------------------------------------------
+        
+    df_features = df.drop('IsBadBuy', axis = 1)                 # define features 
+    df_target   = df['IsBadBuy']                                # define target
+    # -----------------------------------------# Apply the function to the combined text
+    
+    X_train, X_test, y_train, y_test = train_test_split(df_features,                              # train_test_split    
+                                                        df_target,
+                                                        test_size    = 0.1,
+                                                        shuffle      = True,
+                                                        random_state = 42)
+    
+    #to datetime
+    X_train.loc[:, 'PurchDate'] = pd.to_datetime(X_train.loc[:, 'PurchDate'], unit='s')
+    X_test.loc[: , 'PurchDate'] = pd.to_datetime(X_test.loc[: , 'PurchDate'], unit='s')
+    X_aim.loc[:  , 'PurchDate'] = pd.to_datetime(X_aim.loc[:  , 'PurchDate'], unit='s')
+    #-----------------------------------------------------------------------------------
+    X_train = decompose_time(X_train)                             # decomposing time to year, month, day of the week             # converting column types
+    X_test  = decompose_time(X_test)
+    X_aim   = decompose_time(X_aim)
+    convert_to_category(X_train, cat_cols)
+    convert_to_category(X_test, cat_cols)
+    convert_to_category(X_aim, cat_cols)
+    #-------------------------------------------
+
+    category_imputer         = SimpleImputer(strategy   = 'constant', 
+                                             fill_value = 'UNKNOWN')                         # categorical imputer
+    
+    category_imputer.fit(X_train[cat_cols])                                                  # fit to X_train    
+    X_train.loc[:, cat_cols] = category_imputer.transform(X_train.loc[:, cat_cols])          # Transform X_train
+    X_test.loc[: , cat_cols] = category_imputer.transform(X_test.loc[: , cat_cols])          # Transform X_test
+    X_aim.loc[:  , cat_cols] = category_imputer.transform(X_aim.loc[:  , cat_cols])          # Transform X_aim
+    #----------------------------------------------------------------------------------
+
+    # Handle missing values in numerical columns
+    median_imputer           = SimpleImputer(strategy = 'median')                             # Numerical imputer
+    median_imputer.fit(X_train[num_cols])
+    X_train.loc[:, num_cols] = median_imputer.transform(X_train.loc[:, num_cols])
+    X_test.loc[: , num_cols] = median_imputer.transform(X_test.loc[: , num_cols])
+    X_aim.loc[:  , num_cols] = median_imputer.transform(X_aim.loc[:  , num_cols])
+    #-----------------------------------------------
+    
+    # The data type of a DataFrame column can be lost after using a SimpleImputer
+    # SimpleImputer returns a NumPy array, and the data type of the array elements 
+    # may not always match the original data type
+
+    X_train = decompose_time(X_train)                             # decomposing time to year, month, day of the week             # converting column types
+    X_test  = decompose_time(X_test)
+    X_aim   = decompose_time(X_aim)
+    convert_to_category(X_train, cat_cols)
+    convert_to_category(X_test, cat_cols)
+    convert_to_category(X_aim, cat_cols)
+    #------------------------------------------------
+   
+    return X_train, X_test, y_train, y_test, X_aim
+
+# ----------------------------------------------------------------------------------------------------------------------------------

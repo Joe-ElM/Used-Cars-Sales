@@ -119,6 +119,14 @@ issues were discussed in detail.
 
 Incorporated Polynomial Features and K-Means Clusters Feature based on model interpretation. Adjusted the main pipeline to seamlessly integrate the feature engineering function.
 
+Natural Language Processing (NLP), colloquially referred to as NLP, represents a captivating domain nestled within the realms of computer science and artificial intelligence, dedicated to unraveling the intricate dance between machines and human (natural) languages.
+
+In the quest for precise textual analysis, it becomes imperative for machine learning algorithms to discern the underlying structures woven within the fabric of the text. This entails a pivotal procedure known as tokenization, wherein the corpus undergoes meticulous segmentation, dissecting it into meaningful linguistic entities such as words or sentences, meticulously cataloged within a list. These discrete entities, aptly termed tokens, serve as the fundamental building blocks for subsequent analysis and processing.
+
+Certain cleaning and preparation techniques, such as lemmatization, removing stop words, and eliminating punctuation marks, are not employed in this project as they are deemed unnecessary.
+
+The integration of the Model and Submodel effectively reduced the number of features by around 50%. However, this combination resulted in a slight 1% decrease in the overall score.
+
 ### 6. Model Interpretation
 
 Derived insights into feature importance through model-specific methodologies, including analyses of feature importance, and decision tree visualizations.
