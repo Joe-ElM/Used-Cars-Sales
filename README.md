@@ -1,6 +1,5 @@
 # Used-Vehicle-Auctions!
 
-![Used-Vehicle-Auctions](/Images/605.png)
 
 ## Project Overview
 
